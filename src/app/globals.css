@@ -1,5 +1,9 @@
 @import "tailwindcss";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -12,8 +16,18 @@
   --font-mono: var(--font-geist-mono);
 }
 
+.progress-indicator {
+  background: conic-gradient(
+    #4f46e5 var(--progress),
+    #e5e7eb var(--progress)
+  );
+  border-radius: 9999px;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Test Log */
+    --test-log: "Tailwind Directives Applied";
     --background: #0a0a0a;
     --foreground: #ededed;
   }
@@ -23,4 +37,13 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+
+input[type="checkbox"] {
+  accent-color: green;
+}
+
+.first-checkbox {
+  accent-color: red;
 }
