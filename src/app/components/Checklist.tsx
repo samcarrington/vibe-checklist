@@ -38,7 +38,7 @@ const Checklist: React.FC<ChecklistProps> = ({ section, completedItems, handleCh
   return (
     <div
       key={section.title}
-      className="py-8 text-base leading-6 space-y-2 sm:text-lg sm:leading-7 sm:max-w-xl sm:mx-auto"
+      className="bg-white rounded-lg shadow-md p-6 py-8 text-base leading-6 space-y-2 sm:text-lg sm:leading-7 sm:max-w-xl sm:mx-auto mb-4"
     >
       <h2 className="text-2xl font-semibold text-gray-600">{section.title}</h2>
       <p className="text-gray-500">{section.description}</p>
