@@ -34,7 +34,7 @@ const Checklist: React.FC<ChecklistProps> = ({ section, completedItems, handleCh
         <CardDescription>{section.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <ProgressBar progress={progress} />
+        <ProgressBar value={progress} />
         <ul className="mt-2 space-y-1">
           {section.items.map((item: ChecklistItem) => (
             <li key={item.title} className="flex items-center">
