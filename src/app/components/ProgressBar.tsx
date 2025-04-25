@@ -1,29 +1,32 @@
 import React from 'react';
+import { Progress } from "@/components/ui/progress"
 
 interface ProgressBarProps {
-  progress: number;
+  value: number;
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ progress }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ value }) => {
+
+  let colorClass = "";
+  if (value < 33) {
+    colorClass = "bg-red-500";
+  } else if (value > 80) {
+    colorClass = "bg-green-500";
+  } else {
+    colorClass = "bg-yellow-500";
+  }
+
   return (
-    <div className="progress-bar__horizontal w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
-      <div
-        className={`h-2.5 rounded-full transition-all duration-500 ${getProgressBarColorClass(progress)}`}
-        style={{ width: `${progress}%` }}
-      >
+    <div className="relative group mt-2n mb-5">
+      <div className={`p-3 ${colorClass} rounded-xl blur absolute -inset-1 opacity-30 -top-2`}>
       </div>
+      <div class="bg-white relative">
+          <Progress value={value} className={``} />
+        </div>
     </div>
+    
+    
   );
 };
-
-function getProgressBarColorClass(progress: number): string {
-  if (progress < 33) {
-    return "bg-red-500";
-  } else if (progress < 66) {
-    return "bg-yellow-500";
-  } else {
-    return "bg-green-500";
-  }
-}
 
 export default ProgressBar;
