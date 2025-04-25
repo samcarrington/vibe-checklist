@@ -9,7 +9,7 @@ const Header: React.FC<HeaderProps> = ({ title, overallProgress }) => {
   return (
     <section className="relative py-3 sm:max-w-xl sm:mx-auto min-h-40" data-testid="overall-progress-section">
       <div className="relative py-3 sm:max-w-xl sm:mx-auto ">
-        <h1 className="text-2xl font-semibold text-gray-700 text-center w-full pt-6 pb-6">
+        <h1 className="text-3xl font-semibold text-gray-700 dark:text-gray-100 text-center w-full pt-6 pb-6">
           {title}
         </h1>
         <style jsx>{`
