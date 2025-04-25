@@ -45,7 +45,7 @@ const Checklist: React.FC<ChecklistProps> = ({ section, completedItems, handleCh
                   handleCheckboxChange(section.title, item.title);
                 }}
               />
-              <label htmlFor={item.title} className="ml-2 text-gray-800">{item.title}</label>
+              <label htmlFor={item.title} className="ml-2 text-gray-800 dark:text-gray-100">{item.title}</label>
             </li>
           ))}
         </ul>

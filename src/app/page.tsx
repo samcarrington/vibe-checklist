@@ -72,7 +72,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12" data-testid="main-container" data-testlog="Tailwind Classes Applied">
+    <div className="min-h-screen bg-gray-100 dark:bg-slate-800 py-6 flex flex-col justify-center sm:py-12" data-testid="main-container" data-testlog="Tailwind Classes Applied">
       <Header title="Vibe Coding Checklist" overallProgress={overallProgress} />
       <div className="relative px-4 py-4 sm:p-10 mt-2">
         {checklistData.map((section: ChecklistSection) => (
