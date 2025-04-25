@@ -4,9 +4,9 @@ module.exports = {
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
-  modulePaths: ['<rootDir>/src', '<rootDir>'],
+  modulePaths: ['<rootDir>/src'],
   moduleNameMapper: {
     '\\.(css|less|scss|sass)$': 'identity-obj-proxy',
-    '@/(.*)$': '<rootDir>/src/$1',
+    '@/data/checklistData.json': '<rootDir>/src/data/checklistData.json',
   },
 };

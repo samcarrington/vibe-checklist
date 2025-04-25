@@ -1,6 +1,6 @@
 "use client";
 
-import checklistData from "@/data/checklistData.json";
+import checklistData from "./checklistData.json";
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Checklist from "./components/Checklist";
@@ -23,23 +23,15 @@ export default function Home() {
   const [overallProgress, setOverallProgress] = useState(0);
 
   useEffect(() => {
-    if (typeof localStorage !== 'undefined') {
-      const storedProgress = localStorage.getItem('overallProgress');
-      console.log('Retrieved progress from localStorage:', storedProgress);
-      if (storedProgress) {
-        setOverallProgress(parseFloat(storedProgress));
-      }
-    } else {
-      console.log('localStorage is not available');
+    const storedCompletedItems = localStorage.getItem('completedItems');
+    if (storedCompletedItems) {
+      setCompletedItems(JSON.parse(storedCompletedItems));
     }
   }, []);
 
   useEffect(() => {
-    const storedProgress = localStorage.getItem('overallProgress');
-    if (storedProgress) {
-      setOverallProgress(parseFloat(storedProgress));
-    }
-  }, []);
+    localStorage.setItem('completedItems', JSON.stringify(completedItems));
+  }, [completedItems]);
 
   useEffect(() => {
     // Calculate overall progress
@@ -54,7 +46,6 @@ export default function Home() {
     const newProgress = totalItems > 0 ? (totalCompleted / totalItems) * 100 : 0;
     console.log('Setting overallProgress to:', newProgress);
     setOverallProgress(newProgress);
-    localStorage.setItem('overallProgress', newProgress.toString());
   }, [completedItems]);
 
   const handleCheckboxChange = (sectionTitle: string, itemTitle: string) => {
@@ -83,7 +74,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12" data-testid="main-container" data-testlog="Tailwind Classes Applied">
       <Header title="Vibe Coding Checklist" overallProgress={overallProgress} />
-      <div className="relative px-4 py-10 shadow-lg sm:rounded-3xl sm:p-20 mt-12">
+      <div className="relative px-4 py-4 sm:p-10 mt-2">
         {checklistData.map((section: ChecklistSection) => (
           <Checklist
             key={section.title}

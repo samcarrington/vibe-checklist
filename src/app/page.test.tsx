@@ -4,10 +4,11 @@ import '@testing-library/jest-dom';
 
 describe('Checklist Functionality', () => {
   it('Checking a checkbox should increase the percentage of the progress bar for a section', async () => {
-    render(<Home />);
+    const { container } = render(<Home />);
+    console.log(container.innerHTML);
 
     // Find the first checkbox
-    const checkbox = screen.getByRole('checkbox', { name: 'Item 1' });
+    const checkbox = await screen.findByRole('checkbox', { name: /Implement strong password policies/i });
 
     // Find the progress bar
     const progressBar = screen.getByTestId('section-1-progress-bar');
@@ -25,7 +26,7 @@ describe('Checklist Functionality', () => {
     render(<Home />);
 
     // Find the first checkbox
-    const checkbox = screen.getByRole('checkbox', { name: 'Item 1' });
+    const checkbox = await screen.findByRole('checkbox', { name: /Implement strong password policies/i });
 
     // Check the checkbox first
     fireEvent.click(checkbox);
@@ -42,31 +43,35 @@ describe('Checklist Functionality', () => {
     expect(newWidth).not.toBe(initialWidth);
   });
 
-  it('Checking a checkbox should increase the percentage of the overall progress component', async () => {
+  it('Checking a checkbox should increase the overall progress and unchecking should decrease it', async () => {
     render(<Home />);
 
     // Find the first checkbox
-    const checkbox = await screen.findByRole('checkbox', { name: /Item 1/i });
+    const checkbox = await screen.findByRole('checkbox', { name: /Implement strong password policies/i });
+    const header = screen.getByTestId('overall-progress-section');
+
+    // Get the initial progress value
+    const initialProgressText = header.textContent;
+    const initialProgress = parseFloat(initialProgressText?.match(/(\d+\.?\d*)%/)?.[1] || '0');
 
     // Check the checkbox
     fireEvent.click(checkbox);
+    
+    // Get the updated progress value
+    const updatedProgressText = header.textContent;
+    const updatedProgress = parseFloat(updatedProgressText?.match(/(\d+\.?\d*)%/)?.[1] || '0');
 
-    // Find the overall progress element
-    const overallProgressElement = await screen.findByText(/%/);
+    // Assert that the progress has increased
+    expect(updatedProgress).toBeGreaterThan(initialProgress);
 
-    // Get the initial progress value
-    const initialProgress = overallProgressElement.textContent;
-
-    // Check the checkbox again
+    // Uncheck the checkbox
     fireEvent.click(checkbox);
 
-    // Find the updated overall progress element
-    const updatedOverallProgressElement = await screen.findByText(/%/);
+    // Get the final progress value
+    const finalProgressText = header.textContent;
+    const finalProgress = parseFloat(finalProgressText?.match(/(\d+\.?\d*)%/)?.[1] || '0');
 
-    // Get the updated progress value
-    const updatedProgress = updatedOverallProgressElement.textContent;
-
-    // Assert that the progress has changed
-    expect(updatedProgress).not.toBe(initialProgress);
+    // Assert that the progress has decreased
+    expect(finalProgress).toBeLessThan(updatedProgress);
   });
 });
