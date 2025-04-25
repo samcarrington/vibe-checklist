@@ -6,15 +6,6 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ value }) => {
-  const getColor = () => {
-    if (value < 33) {
-      return "red";
-    } else if (value > 80) {
-      return "green";
-    } else {
-      return "yellow";
-    }
-  };
 
   let colorClass = "";
   if (value < 33) {
@@ -26,7 +17,15 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ value }) => {
   }
 
   return (
-    <Progress value={value} className={`[&>[data-slot='progress-indicator']]:${colorClass}`} />
+    <div className="relative group mt-2n mb-5">
+      <div className={`p-3 ${colorClass} rounded-xl blur absolute -inset-1 opacity-30 -top-2`}>
+      </div>
+      <div class="bg-white relative">
+          <Progress value={value} className={``} />
+        </div>
+    </div>
+    
+    
   );
 };
 
