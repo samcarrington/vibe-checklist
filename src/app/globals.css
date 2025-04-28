@@ -49,8 +49,8 @@
 
 .progress-indicator {
   background: conic-gradient(
-    #4f46e5 var(--progress),
-    #e5e7eb var(--progress)
+    var(--color-accent-foreground) var(--progress),
+    var(--color-chart-1) var(--progress)
   );
   border-radius: 9999px;
 }

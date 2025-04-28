@@ -25,11 +25,14 @@ export default function Home() {
   useEffect(() => {
     const storedCompletedItems = localStorage.getItem('completedItems');
     if (storedCompletedItems) {
-      setCompletedItems(JSON.parse(storedCompletedItems));
+      const parsedCompletedItems = JSON.parse(storedCompletedItems);
+      console.log('Retrieved from localStorage:', parsedCompletedItems);
+      setCompletedItems(parsedCompletedItems);
     }
   }, []);
 
   useEffect(() => {
+    console.log('Saving to localStorage:', completedItems);
     localStorage.setItem('completedItems', JSON.stringify(completedItems));
   }, [completedItems]);
 

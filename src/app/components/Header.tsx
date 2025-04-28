@@ -18,8 +18,8 @@ const Header: React.FC<HeaderProps> = ({ title, overallProgress }) => {
           }
         `}</style>
         <div className="flex items-center justify-center p-5 w-64 h-64 mx-auto progress-indicator">
-          <div className="w-full h-full rounded-full bg-white relative">
-            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-700 font-semibold text-3xl">{Math.round(overallProgress)}%</span>
+          <div className="w-full h-full rounded-full bg-white dark:bg-slate-700 relative">
+            <span className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-gray-700 dark:text-gray-200 font-semibold text-3xl">{Math.round(overallProgress)}%</span>
           </div>
         </div>
       </div>

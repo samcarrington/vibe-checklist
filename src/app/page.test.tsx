@@ -1,4 +1,6 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, act } from '@testing-library/react';
+import { screen, fireEvent } from '@testing-library/dom';
+import '@testing-library/jest-dom';
 import Home from './page';
 import '@testing-library/jest-dom';
 
@@ -42,6 +44,27 @@ describe('Checklist Functionality', () => {
     const newWidth = progressBar.style.width;
     expect(newWidth).not.toBe(initialWidth);
   });
+  
+    it('should persist checkbox states after page reload', async () => {
+      render(<Home />);
+  
+      // Find the first checkbox
+      const checkbox = await screen.findByRole('checkbox', { name: /Implement strong password policies/i });
+  
+      // Check the checkbox
+      await act(async () => {
+        fireEvent.click(checkbox);
+      });
+  
+      // Reload the page
+      window.location.reload();
+  
+      // Find the checkbox again
+      const reloadedCheckbox = await screen.findByRole('checkbox', { name: /Implement strong password policies/i });
+  
+      // Check if the checkbox is still checked
+      expect(reloadedCheckbox).toBeChecked();
+    });
 
   it('Checking a checkbox should increase the overall progress and unchecking should decrease it', async () => {
     render(<Home />);
